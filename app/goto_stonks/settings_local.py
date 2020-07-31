@@ -13,6 +13,6 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = 'hdhdh'
-ALLOWED_HOSTS = ['']
+SECRET_KEY = 'goto-stonks'
+ALLOWED_HOSTS = ['127.0.0.1']
 DEBUG = True
