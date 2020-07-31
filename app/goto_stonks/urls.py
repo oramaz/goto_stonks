@@ -18,6 +18,7 @@ from django.urls import path
 from webapp.views.manager import projects, invites
 from webapp.views.user import auth, dashboard
 from webapp.views.api import open
+from webapp.views.api import api
 from django.shortcuts import redirect
 
 urlpatterns = [
@@ -40,4 +41,6 @@ urlpatterns = [
     path('', lambda r:redirect('dashboard'), name='index'),
 
     path('api/open/prices', open.get_prices, name='api.open.get_prices'),
+    path('api/users', api.get_users , name='api.get_users'),
+
 ]
