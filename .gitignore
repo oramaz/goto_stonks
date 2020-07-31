@@ -1,2 +1,6 @@
 goto_stonks/settings_local.py
 .idea/*
+web/.idea
+web/node_modules/
+app/.idea
+app/webapp/views/user/__pycache__
