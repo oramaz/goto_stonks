@@ -26,17 +26,11 @@ form span {
   margin: auto 5px;
 }
 form input {
-  border: 2px solid green;
+  border: 0;
   border-radius: 3px;
-  color: white;
-  background: green;
-
-  width: 40px;
+  background: #efefef;
+  width: 60px;
+  height: 25px;
   margin: auto 10px;
+  outline: none !important;
 }
-
-#stock {
-    background: red;
-    border: 1px solid red;
-}
-
