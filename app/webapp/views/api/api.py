@@ -39,10 +39,7 @@ class SetToSale(APIView):
         count = int(request.data.get('count'))
         time = datetime.datetime.now()
         author = request.data.get('author')
-        print(project, price, count, time, author)
-
-    
-
+        
         try:
             sale = ToSale(price=price,
                         count=count, 
@@ -97,13 +94,13 @@ class GetToBuy(APIView):
     permission_classes = ()
 
     def get(self, request):
-        all_projects = Project.objects.all()
+        proccess_glass()
+        # all_projects = Project.objects.all()
         all_to_buy = ToBuy.objects.all()
         query = all_to_buy.order_by('price')
-
         try:
             project = request.query_params['project']
-            query = query.filter(project=all_projects.filter(name=project)[0])[:10]
+            query = query.filter(project__name=project)[:10]
 
             result = [
                 {
@@ -122,13 +119,13 @@ class GetToSale(APIView):
     permission_classes = ()
 
     def get(self, request):
+        proccess_glass()
         all_projects = Project.objects.all()
         all_to_sale = ToSale.objects.all()
         query = all_to_sale.order_by('price')
-        proccess_glass()
         try:
             project = request.query_params['project']
-            query = query.filter(project=all_projects.filter(name=project)[0])[:10]
+            query = query.filter(project__name=project)[:10]
 
             result = [
                 {
@@ -140,7 +137,6 @@ class GetToSale(APIView):
 
             return Response(result, status=HTTP_200_OK)
         except Exception as e:
-            print(e)
             return Response({"status": "error"}, status=HTTP_400_BAD_REQUEST)
 
 
@@ -174,25 +170,21 @@ class News(APIView):
     def post(self, request):
         try:
             data = request.data
-            print(data)
             p = Paragraph(name=data["name"], time=data["time"], text=data["text"])
             p.save()
             return Response(status=HTTP_200_OK)
         except Exception as e:
-            print(e)
             return Response(status=HTTP_400_BAD_REQUEST)
-
+    
 def proccess_glass():
     sellers = ToSale.objects.all().order_by('price', 'time')
     buyers = ToBuy.objects.all().order_by('time', 'price')
     for buyer in buyers:
-        print(buyer.id)
-        sellers.filter(price__lte=buyer.price)
+        sellers = sellers.filter(price__lte=buyer.price)
         count = buyer.count
         to_del = []
         if len(sellers):
             for seller in sellers:
-                print(count)
                 if (count > 0):
                     if seller.count <= count:
                         count -= seller.count
@@ -210,12 +202,20 @@ def proccess_glass():
                         
                 else:
                     break
-        print(count)
+
         if count <= 0:
-            instance = ToBuy.objects.get(id=buyer.id)
-            instance.delete()
+            try:
+                instance = ToBuy.objects.get(id=buyer.id)
+                instance.delete()
+            except Exception as e:
+                print(e)
+                   
         else:
             buyer.count = count
+            buyer.save()
         for id_ in to_del:
-            instance = ToSale.objects.get(id=id_)
-            instance.delete()
+            try:
+                instance = ToSale.objects.get(id=id_)
+                instance.delete()
+            except Exception as e:
+                print(e)
