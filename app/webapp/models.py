@@ -216,17 +216,20 @@ class StockRecord(models.Model):
 
 
 class ToSale(models.Model):
-    time = models.TimeField(blank=False, null=False)
+    time = models.TimeField(null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     price = models.FloatField(default=0)
     count = models.PositiveIntegerField(default=0)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 class ToBuy(models.Model):
-    time = models.TimeField(blank=False, null=False)
+    time = models.TimeField(null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     price = models.FloatField(default=0)
     count = models.PositiveIntegerField(default=0)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
 
 def get_user_balance(user: User):
     return user.billingrecord_set.aggregate(Sum('amount')).get('amount__sum', 0) or 0
