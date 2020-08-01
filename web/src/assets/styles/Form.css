@@ -4,16 +4,6 @@
   justify-content: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid white;
-  background: #515151;
-  border-radius: 7px;
-  padding: 5px;
-  width: 300px;
-  margin: 10px auto;
-}
 
 .form-content {
   width: 300px;
@@ -28,12 +18,10 @@ form {
 }
 
 form p {
-  color: white;
   margin: 5px auto;
   font-size: 15px;
 }
 form span {
-  color: white;
   font-size: 13px;
   margin: auto 5px;
 }
@@ -52,17 +40,3 @@ form input {
     border: 1px solid red;
 }
 
-form button {
-  background: white;
-  font-weight: bolder;
-  color: rgb(51, 51, 51);
-  padding: 3px;
-  border: 2px solid white;
-  border-radius: 7px;
-  margin: auto 0;
-  transition: .5s;
-}
-form button:hover {
-    background: rgb(200, 200, 200);
-    color: rgb(51, 51, 51);
-}

@@ -1,0 +1,17 @@
+.block {
+  box-shadow: 0 0 40px rgba(212, 223, 231, 0.75);
+  background: white;
+  border-radius: 15px;
+  padding: 5px;
+  width: 100%;
+}
+.block-sm {
+    padding: 15px 25px;
+    max-width: 300px;
+}
+
+.block-title {
+  color: black;
+  font-weight: 600;
+  font-size: 18px;
+}
