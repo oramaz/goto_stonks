@@ -4,3 +4,4 @@ web/.idea
 web/node_modules/
 app/.idea
 app/webapp/views/user/__pycache__
+app/db.sqlite3
