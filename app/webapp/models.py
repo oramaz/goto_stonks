@@ -215,5 +215,18 @@ class StockRecord(models.Model):
     can_sell = models.BooleanField(default=True, verbose_name="Можно продать")
 
 
+class ToSale(models.Model):
+    time = models.TimeField(blank=False, null=False)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    price = models.FloatField(default=0)
+    count = models.PositiveIntegerField(default=0)
+
+
+class ToBuy(models.Model):
+    time = models.TimeField(blank=False, null=False)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+    price = models.FloatField(default=0)
+    count = models.PositiveIntegerField(default=0)
+
 def get_user_balance(user: User):
     return user.billingrecord_set.aggregate(Sum('amount')).get('amount__sum', 0) or 0
