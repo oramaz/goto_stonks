@@ -1,16 +1,23 @@
-import React from "react";
+import React, {FormEvent, useState} from "react";
 import "../assets/styles/Form.css";
 type Props = {
-   handleStockAction: () => void;
+   handleStockAction: (type: string, price: number, count: number) => void;
 };
 const StockAction = (props: Props) => {
+   const [countValue, setCountValue] = useState<number | undefined>();
+
+   const handleSubmit = (type: string, price: number | undefined, count: number | undefined) => {
+      if(type && price && count && price > 0 && count > 0){
+         props.handleStockAction(type, price, count)
+         setCountValue(undefined)
+      } else {
+         alert("Введите нормальный формат данных")
+      }
+   }
+
    return (
       <div className="block block-sm">
-         <form
-            onSubmit={() => {
-               props.handleStockAction();
-            }}
-         >
+         <form>
             <div className="text-center"  style={{marginBottom: "10px"}}>
               <span className="block-title">Рыночная цена</span>
             </div>
@@ -21,12 +28,16 @@ const StockAction = (props: Props) => {
                   type="number"
                   min={0}
                   required
+                  onChange={(e => setCountValue(Number(e.target.value)))}
+
                />
                <span>акций</span>
             </div>
             <div className="d-flex justify-content-center" style={{ justifyContent: "space-between" }}>
-               <button type="submit" className="btn btn-green btn-full-width" style={{ width: "49%" }}>Купить</button>
-               <button type="submit" className="btn btn-red btn-full-width" style={{ width: "49%" }}>Продать</button>
+               <button type="submit"
+                       onClick={() => handleSubmit("buy", 100, countValue)} className="btn btn-green btn-full-width" style={{ width: "49%" }}>Купить</button>
+               <button type="submit"
+                       onClick={() => handleSubmit("sell", 100, countValue)} className="btn btn-red btn-full-width" style={{ width: "49%" }}>Продать</button>
             </div>
          </form>
       </div>

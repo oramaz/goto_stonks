@@ -36,4 +36,38 @@ export default class TerminalService {
          axios(configs, resolve, reject);
       });
    }
+   async sell(params: {project: string, price: number, count: number, author: string} ,options: IRequestOptions = {}
+   ): Promise<any> {
+      return new Promise((resolve, reject) => {
+         let url = "/to_sale/";
+
+         const configs: IRequestConfig = getConfigs(
+            "post",
+            "application/json",
+            url,
+            options
+         );
+
+         configs.data = params
+
+         axios(configs, resolve, reject);
+      });
+   }
+   async buy(params: {project: string, price: number, count: number, author: string},options: IRequestOptions = {}
+   ): Promise<any> {
+      return new Promise((resolve, reject) => {
+         let url = "/to_buy/";
+
+         const configs: IRequestConfig = getConfigs(
+            "post",
+            "application/json",
+            url,
+            options
+         );
+
+         configs.data = params
+
+         axios(configs, resolve, reject);
+      });
+   }
 }
