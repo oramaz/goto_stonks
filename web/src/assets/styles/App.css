@@ -13,6 +13,19 @@
   }
 }
 
+.news {
+  width: 400px;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background: #515151;
+}
+
+.main-content {
+  margin-right: 430px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +35,29 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.glass {
+  margin-right: 10px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.row {
+  padding: 5px;
+  display: flex;
+  justify-content: start;
+}
+
+
+.row-sb {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .App-link {
