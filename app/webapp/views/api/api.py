@@ -39,7 +39,8 @@ class SetToSale(APIView):
         count = int(request.data.get('count'))
         time = datetime.datetime.now()
         author = request.data.get('author')
-        
+        print(project, price, count, time, author)
+
         try:
             sale = ToSale(price=price,
                         count=count, 
@@ -57,6 +58,41 @@ class SetToSale(APIView):
         }, status=HTTP_200_OK)
 
 
+def proccess_glass():
+    sellers = ToSale.objects.all().order_by('price', 'time')
+    buyers = ToBuy.objects.all().order_by('time', 'price')
+    for buyer in buyers:
+        print(buyer.id)
+        sellers.filter(price__lte=buyer.price)
+        count = buyer.count
+        to_del = []
+        if len(sellers):
+            for seller in sellers:
+                print(count)
+                if (count > 0):
+                    if seller.count <= count:
+                        count -= seller.count
+                        # здесь все акции у продавца проланы нужно выплатить деньги
+                        to_del += [seller.id]
+                    else:
+                        # здесь все акции которые были у скупщика проданы
+                        # продавцу нужно отсыпать бабла
+                        seller.count -= count
+                        count -= count # 0 
+                        seller.save() # > 0
+                        
+                else:
+                    break
+        print(count)
+        if count <= 0:
+            instance = ToBuy.objects.get(id=buyer.id)
+            instance.delete()
+        else:
+            buyer.count = count
+        for id_ in to_del:
+            instance = ToSale.objects.get(id=id_)
+            instance.delete()
+
 class SetToBuy(APIView):
     permission_classes = ()
 
@@ -69,7 +105,7 @@ class SetToBuy(APIView):
         count = int(request.data.get('count'))
         time = datetime.datetime.now()
         author = request.data.get('author')
-        
+
         try:
             purchase = ToBuy(price=price,
                         count=count, 
@@ -96,7 +132,7 @@ class GetToBuy(APIView):
         query = all_to_buy.order_by('price')
 
         try:
-            project = request.data.get('project')
+            project = request.query_params['project']
             query = query.filter(project=all_projects.filter(name=project)[0])[:10]
 
             result = [
@@ -120,8 +156,10 @@ class GetToSale(APIView):
         all_to_sale = ToSale.objects.all()
         query = all_to_sale.order_by('price')
 
+        proccess_glass()
+
         try:
-            project = request.data.get('project')
+            project = request.query_params['project']
             query = query.filter(project=all_projects.filter(name=project)[0])[:10]
 
             result = [
@@ -139,5 +177,15 @@ class GetToSale(APIView):
 
 class GeneralInfo(APIView):
     permission_classes = ()
+
+
+class Deals(APIView):
+    permission_classes = ()
+
+    def get(self, request):
+        all_to_sale = ToSale.objects.all()
+        all_to_buy = ToBuy.objects.all()
+
+    
 
 
