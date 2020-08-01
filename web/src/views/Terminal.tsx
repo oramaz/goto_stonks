@@ -20,7 +20,6 @@ export const Terminal = () => {
                     <PriceAction handleStockAction={handleStockAction}/>
                  </div>
                  <StockAction handleStockAction={handleStockAction}/>
-                 <StockAction handleStockAction={handleStockAction}/>   
               </div>
            </div>
         </div>
