@@ -56,3 +56,32 @@ class SetToSale(APIView):
             "status": "Данные успешно записаны" 
         }, status=HTTP_200_OK)
 
+
+class SetToBuy(APIView):
+    permission_classes = ()
+
+    def post(self, request,):
+        all_projects = Project.objects.all()
+        all_users = User.objects.all()
+
+        project = request.data.get('project')
+        price = float(request.data.get('price'))
+        count = int(request.data.get('count'))
+        time = datetime.datetime.now()
+        author = request.data.get('author')
+        
+        try:
+            purchase = ToBuy(price=price,
+                        count=count, 
+                        project=all_projects.filter(name=project)[0], 
+                        time=time, 
+                        author=all_users.filter(username=author)[0])
+            purchase.save()
+        except Exception:
+            return Response({
+                "status": "error"
+            }, status=HTTP_400_BAD_REQUEST)
+
+        return Response({
+            "status": "Данные успешно записаны" 
+        }, status=HTTP_200_OK)

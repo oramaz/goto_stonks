@@ -22,7 +22,7 @@ from webapp.views.api import open
 from webapp.views.api import api
 from django.shortcuts import redirect
 
-from webapp.views.api.api import SetToSale
+from webapp.views.api.api import SetToSale, SetToBuy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,6 +46,6 @@ urlpatterns = [
     path('api/open/prices', open.get_prices, name='api.open.get_prices'),
     path('api/users', api.get_users , name='api.get_users'),
     url(r'^to_sale/$', SetToSale.as_view(), name="to_sale"),
-
+    url(r'^to_buy/$', SetToBuy.as_view(), name="to_buy"),
 
 ]
