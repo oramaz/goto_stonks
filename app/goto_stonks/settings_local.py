@@ -14,5 +14,6 @@ DATABASES = {
 }
 
 SECRET_KEY = 'goto-stonks'
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.235.10', '192.168.245.38', '192.168.235.43', 'localhost' ]
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.235.10', '192.168.245.38', '192.168.235.43', 'localhost', '192.168.235.23' ]
 DEBUG = True
+APPEND_SLASH=False

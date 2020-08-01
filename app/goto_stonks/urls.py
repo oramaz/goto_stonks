@@ -22,7 +22,7 @@ from webapp.views.api import open
 from webapp.views.api import api
 from django.shortcuts import redirect
 
-from webapp.views.api.api import SetToSale, SetToBuy, GetToBuy, GetToSale
+from webapp.views.api.api import SetToSale, SetToBuy, GetToBuy, GetToSale, Deals, News
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^to_buy/$', SetToBuy.as_view(), name="to_buy"),
     url(r'^get_to_buy/$', GetToBuy.as_view(), name="get_to_buy"),
     url(r'^get_to_sale/$', GetToSale.as_view(), name="get_to_sale"),
-
+    url(r'^get_deals/$', Deals.as_view(), name="get_deals"),
+    url(r'^add_paragraph/$', News.as_view(), name="add_paragraph"),
     url(r'^rest-auth/', include('rest_auth.urls'))
 ]

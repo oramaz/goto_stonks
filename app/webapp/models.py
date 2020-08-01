@@ -234,17 +234,18 @@ class ToBuy(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
-class Deals(models.Model):
-    time = models.TimeField(null=True)
+class Deal(models.Model):
+    time = models.DateTimeField(null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     price = models.FloatField(default=0)
     count = models.PositiveIntegerField(default=0)
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='seller', null=True)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buyer', null=True)
 
-class News(models.Model):
+class Paragraph(models.Model):
+    name = models.CharField(max_length=250, null=True)
     text = models.TextField(null=True)
-    time = models.TimeField(null=True)
+    time = models.DateTimeField(null=True)
 
 def get_user_balance(user: User):
     return user.billingrecord_set.aggregate(Sum('amount')).get('amount__sum', 0) or 0
