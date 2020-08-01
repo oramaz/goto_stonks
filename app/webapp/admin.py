@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import *
+
+
+admin.site.register(Project)
+admin.site.register(Invite)
+admin.site.register(BillingRecord)
+admin.site.register(StockHistory)
+admin.site.register(IpoRecord)
+admin.site.register(StockRecord)
