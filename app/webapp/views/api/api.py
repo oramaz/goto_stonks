@@ -85,3 +85,59 @@ class SetToBuy(APIView):
         return Response({
             "status": "Данные успешно записаны" 
         }, status=HTTP_200_OK)
+
+
+class GetToBuy(APIView):
+    permission_classes = ()
+
+    def get(self, request):
+        all_projects = Project.objects.all()
+        all_to_buy = ToBuy.objects.all()
+        query = all_to_buy.order_by('price')
+
+        try:
+            project = request.data.get('project')
+            query = query.filter(project=all_projects.filter(name=project)[0])[:10]
+
+            result = [
+                {
+                    "price": elem.price,
+                    "count": elem.count,
+                }
+                for elem in query
+            ]
+
+            return Response(result, status=HTTP_200_OK)
+        except Exception:
+            return Response({"status": "error"}, status=HTTP_400_BAD_REQUEST)
+
+
+class GetToSale(APIView):
+    permission_classes = ()
+
+    def get(self, request):
+        all_projects = Project.objects.all()
+        all_to_sale = ToSale.objects.all()
+        query = all_to_sale.order_by('price')
+
+        try:
+            project = request.data.get('project')
+            query = query.filter(project=all_projects.filter(name=project)[0])[:10]
+
+            result = [
+                {
+                    "price": elem.price,
+                    "count": elem.count,
+                }
+                for elem in query
+            ]
+
+            return Response(result, status=HTTP_200_OK)
+        except Exception:
+            return Response({"status": "error"}, status=HTTP_400_BAD_REQUEST)
+
+
+class GeneralInfo(APIView):
+    permission_classes = ()
+
+

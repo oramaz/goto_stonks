@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url
 from webapp.views.manager import projects, invites
 from webapp.views.user import auth, dashboard
@@ -22,7 +22,7 @@ from webapp.views.api import open
 from webapp.views.api import api
 from django.shortcuts import redirect
 
-from webapp.views.api.api import SetToSale, SetToBuy
+from webapp.views.api.api import SetToSale, SetToBuy, GetToBuy, GetToSale
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,7 +45,11 @@ urlpatterns = [
 
     path('api/open/prices', open.get_prices, name='api.open.get_prices'),
     path('api/users', api.get_users , name='api.get_users'),
+    # path('api/get_to_buy', api.get_to_buy , name='api.get_to_buy'),
     url(r'^to_sale/$', SetToSale.as_view(), name="to_sale"),
     url(r'^to_buy/$', SetToBuy.as_view(), name="to_buy"),
+    url(r'^get_to_buy/$', GetToBuy.as_view(), name="get_to_buy"),
+    url(r'^get_to_sale/$', GetToSale.as_view(), name="get_to_sale"),
 
+    url(r'^rest-auth/', include('rest_auth.urls'))
 ]
