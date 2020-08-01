@@ -44,7 +44,7 @@ export function getConfigs(method: string, contentType: string, endpointPath: st
    configs.headers = {
       ...options.headers
    };
-
+   console.log(configs)
    configs.headers = {
       ...configs.headers
    };

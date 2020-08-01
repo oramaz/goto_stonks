@@ -11,8 +11,9 @@ const PriceAction = (props: Props) => {
                     props.handleStockAction();
                 }}
             >
-                <p className="block-title text-center"
-                   style={{marginBottom: "10px"}}>Заявка на цену</p>
+                <div className="text-center" style={{marginBottom: "10px"}}>
+              <span className="block-title">Заявка на цену</span>
+                </div>
                 <div className="form-content" style={{marginBottom: "10px"}}>
                     <input
                         type="number"

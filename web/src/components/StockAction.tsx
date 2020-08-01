@@ -11,8 +11,9 @@ const StockAction = (props: Props) => {
                props.handleStockAction();
             }}
          >
-            <p className="block-title text-center"
-               style={{marginBottom: "10px"}}>Рыночная цену</p>
+            <div className="text-center"  style={{marginBottom: "10px"}}>
+              <span className="block-title">Рыночная цена</span>
+            </div>
             <div className="form-content" style={{marginBottom: "10px"}}>
                <span style={{fontSize: "16px"}}>100</span>
                <span>готублей</span>
