@@ -1,12 +1,16 @@
 import React from "react";
+import "../assets/styles/Form.css"
 type Props = {
   onSell: () => void;
 };
 const StockSellForm = (props: Props) => {
   return (
     <div>
-      <form>
+      <form  onSubmit={() => {
+          props.onSell();
+        }}>
         <p>Продать акцию</p>
+        <div className="form-content">
         <input
           type="text"
           placeholder="Введите цену акции"
@@ -17,10 +21,12 @@ const StockSellForm = (props: Props) => {
           type="text"
           placeholder="Введите кол-во акций для продажи"
           defaultValue="1"
+          id="stock"
         ></input>
         <span>акций</span>
+        </div>
         <br></br>
-        <button type="submit">Submit</button>
+        <button type="submit">Продать</button>
       </form>
     </div>
   );

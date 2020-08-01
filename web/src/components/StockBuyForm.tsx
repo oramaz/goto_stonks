@@ -28,7 +28,7 @@ const StockBuyForm = (props: Props) => {
           <span>акций</span>
         </div>
         <br></br>
-        <button type="submit">Submit</button>
+        <button type="submit">Купить</button>
       </form>
     </div>
   );
