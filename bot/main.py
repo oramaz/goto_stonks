@@ -17,7 +17,7 @@ news = []
 def get_news(message):
     global news
     if "#stonks" in message.text:
-        news_content = message.caption.replace("#stonks", "").strip()
+        news_content = message.text.replace("#stonks", "").strip()
         if news_content:
             stamp = str(datetime.datetime.utcnow())
             news += [{"content" : news_content, "timestamp" : stamp}]

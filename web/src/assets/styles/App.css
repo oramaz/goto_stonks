@@ -13,6 +13,8 @@
   }
 }
 
+
+
 .news {
   width: 400px;
   height: 100vh;
@@ -47,15 +49,21 @@
   justify-content: start;
 }
 
+.column-sb {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .row {
-  padding: 5px;
+  /* padding: 5px; */
   display: flex;
   justify-content: start;
 }
 
 
 .row-sb {
-  padding: 5px;
+  /* padding: 5px; */
   display: flex;
   justify-content: space-between;
 }

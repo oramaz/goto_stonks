@@ -12,8 +12,9 @@ export const Terminal = () => {
            <Chart />
            <div className="row-sb">
               <Glass />
-              <div className="column">
+              <div className="column-sb">
                  <StockAction handleStockAction={handleStockAction}/>
+                 <StockAction handleStockAction={handleStockAction}/>   
               </div>
            </div>
         </div>
