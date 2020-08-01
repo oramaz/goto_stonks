@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ReactApexChart from 'react-apexcharts'
 import moment from "moment";
 
@@ -8,10 +8,10 @@ type Props = {
 }
 
 export const Chart = (props: Props) => {
-   const { data } = props
+   const { data, project } = props
 
    const prices = data.map(x => x.price)
-   console.log(data.map(x => x.time))
+
    const dates = data.map(x => moment(x.time).format("lll"))
 
    const options = {
@@ -36,7 +36,7 @@ export const Chart = (props: Props) => {
             height: 350,
             zoom: {
                enabled: true
-            }
+            },
          },
          dataLabels: {
             enabled: false
@@ -46,13 +46,13 @@ export const Chart = (props: Props) => {
          },
 
          title: {
-            text: 'Fundamental Analysis of Stocks',
+            text: project,
             align: 'left'
          },
-         subtitle: {
-            text: 'Price Movements',
-            align: 'left'
-         },
+         // subtitle: {
+         //    text: 'Price Movements',
+         //    align: 'left'
+         // },
          labels: dates,
          xaxis: {
             type: 'string',
@@ -65,7 +65,6 @@ export const Chart = (props: Props) => {
          }
       }
    };
-
    return (
       <div id="chart">
          <ReactApexChart options={options.options} type="area" series={options.series}  height={350} />

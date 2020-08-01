@@ -29,15 +29,15 @@ export const Terminal = () => {
    }
 
    const loadData = () => {
-      getDealsData()
       getGlassData()
+      getDealsData()
    }
 
   const handleStockAction = (type: string, price: number, count: number) => {
      if(type === "sell") {
-        service.sell({project: project, author: "abakunov", price: price, count: count}).then((res) => loadData())
+        service.sell({project: project, author: "abakunov", price: price, count: count}).then((res) => getGlassData())
      } else if (type === "buy") {
-        service.buy({project: project, author: "abakunov", price: price, count: count}).then((res) => loadData())
+        service.buy({project: project, author: "abakunov", price: price, count: count}).then((res) => getGlassData())
      }
   }
 
@@ -45,6 +45,9 @@ export const Terminal = () => {
       loadData()
    }, [])
 
+   const interval = setInterval(function() {
+      getDealsData()
+   }, 600000);
 
   return (
      <div>
