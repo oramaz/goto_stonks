@@ -1,19 +1,24 @@
 import React from "react";
 import ReactApexChart from 'react-apexcharts'
+import moment from "moment";
 
-export const Chart = () => {
-   const labels2 = [] as string[]
-   const data = [100, 700, 500, 300, 300,100, 700, 500, 300,100, 700, 500, 300,100, 700, 500, 300,100, 700, 500, 300]
+type Props = {
+   data: {price: number, time: string}[],
+   project: string
+}
 
-   for (let i = 0; i < data.length; ++i) {
-      labels2.push(`lol${i}` as string)
-   }
-   console.log(labels2)
+export const Chart = (props: Props) => {
+   const { data } = props
+
+   const prices = data.map(x => x.price)
+   console.log(data.map(x => x.time))
+   const dates = data.map(x => moment(x.time).format("lll"))
+
    const options = {
 
       series: [{
-         name: "STOCK ABC",
-         data: data
+         name: props.project,
+         data: prices
       }],
       options: {
          theme: {
@@ -30,7 +35,7 @@ export const Chart = () => {
             type: 'area',
             height: 350,
             zoom: {
-               enabled: false
+               enabled: true
             }
          },
          dataLabels: {
@@ -48,7 +53,7 @@ export const Chart = () => {
             text: 'Price Movements',
             align: 'left'
          },
-         labels: labels2,
+         labels: dates,
          xaxis: {
             type: 'string',
          },

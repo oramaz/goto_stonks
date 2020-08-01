@@ -19,17 +19,17 @@ export default (props: Props) => {
         <div>
            <div className="d-flex glass-row">
               <div style={{width: "75px"}}>
-                 {buysData.map(x => {
+                 {buysData.map((x,i) => {
                     return (
-                        <div style={{marginBottom: "5px"}}>{x.price.toLocaleString()} гт. x {x.count}</div>
+                        <div key={i} style={{marginBottom: "5px"}}>{x.price.toLocaleString()} гт. x {x.count}</div>
                     )
                  })}
               </div>
               <div style={{borderRight: "1px solid rgb(225 225 225)"}}></div>
               <div style={{width: "75px"}}>
-                 {sellsData.map(x => {
+                 {sellsData.map((x, i) => {
                     return (
-                       <div style={{textAlign: "right", marginBottom: "5px"}}>{x.price.toLocaleString()} гт.  x {x.count}</div>
+                       <div key={i} style={{textAlign: "right", marginBottom: "5px"}}>{x.price.toLocaleString()} гт.  x {x.count}</div>
                     )
                  })}
               </div>

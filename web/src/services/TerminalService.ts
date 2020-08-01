@@ -70,4 +70,21 @@ export default class TerminalService {
          axios(configs, resolve, reject);
       });
    }
+   async getDeals(params: {project: string},options: IRequestOptions = {}
+   ): Promise<any> {
+      return new Promise((resolve, reject) => {
+         let url = "/get_deals/";
+
+         const configs: IRequestConfig = getConfigs(
+            "get",
+            "application/json",
+            url,
+            options
+         );
+
+         configs.params = params
+
+         axios(configs, resolve, reject);
+      });
+   }
 }

@@ -10,30 +10,39 @@ import {GlassItem} from "../models/Terminal";
 const service = new TerminalService();
 
 export const Terminal = () => {
+   const [project, setProject] = useState("ddddd")
+   const [sellsData, setSellsData] = useState<GlassItem[]>([])
+   const [buysData, setBuysData] = useState<GlassItem[]>([])
+   const [dealsData, setDealsData] = useState<{price: number, time: string}[]>([])
+
+   const getDealsData = () => {
+      service.getDeals({project: project})
+         .then((res) => setDealsData(res)).catch((e) => alert(e))
+   }
 
    const getGlassData = () => {
-      service.getSells({project: "ddddd"})
+      service.getSells({project: project})
          .then((res) => setSellsData(res)).catch((e) => alert(e))
 
-      service.getBuys({project: "ddddd"})
+      service.getBuys({project: project})
          .then((res) => setBuysData(res)).catch((e) => alert(e))
    }
 
+   const loadData = () => {
+      getDealsData()
+      getGlassData()
+   }
+
   const handleStockAction = (type: string, price: number, count: number) => {
-     console.log(type)
      if(type === "sell") {
-        console.log(type, price, count)
-        service.sell({project: "ddddd", author: "abakunov", price: price, count: count}).then((res) => getGlassData())
+        service.sell({project: project, author: "abakunov", price: price, count: count}).then((res) => loadData())
      } else if (type === "buy") {
-        service.buy({project: "ddddd", author: "abakunov", price: price, count: count}).then((res) => getGlassData())
+        service.buy({project: project, author: "abakunov", price: price, count: count}).then((res) => loadData())
      }
   }
 
-  const [sellsData, setSellsData] = useState<GlassItem[]>([])
-  const [buysData, setBuysData] = useState<GlassItem[]>([])
-
    useEffect(() => {
-      getGlassData()
+      loadData()
    }, [])
 
 
@@ -41,7 +50,7 @@ export const Terminal = () => {
      <div>
         <div className="main-content">
            <div className="block" style={{height: "52vh", marginBottom: "15px"}}>
-               <Chart />
+               <Chart data={dealsData} project={project} />
            </div>
            <div className="row-sb" style={{height: "42vh"}}>
               <Glass sellsData={sellsData} buysData={buysData} />
