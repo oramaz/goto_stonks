@@ -6,10 +6,17 @@ import StockAction from "../components/StockAction";
 export const Terminal = () => {
   const handleStockAction = () => { }
   return (
-    <div>
-      <Chart />
-      <Glass />
-      <StockAction handleStockAction={handleStockAction} />
-    </div>
-  );
+     <div>
+        <div className="main-content">
+           <Chart />
+           <div className="row-sb">
+              <Glass />
+              <div className="column">
+                 <StockAction handleStockAction={handleStockAction}/>
+              </div>
+           </div>
+        </div>
+        <News />
+     </div>
+  )
 };
