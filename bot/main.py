@@ -41,7 +41,7 @@ def update_news(news):
 @bot.message_handler(content_types=['document', 'audio', 'photo'])
 def get_photos(message):
     global news
-    f "#stonks" in message.caption:
+    if "#stonks" in message.caption:
         length = len("#stonks")
         index = message.text.index("#stonks") + length
         if index <= len(message.caption) and message.caption[index] == " ":

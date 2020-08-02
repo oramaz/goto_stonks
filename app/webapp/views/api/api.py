@@ -182,6 +182,7 @@ class NewsGet(APIView):
         try:
             elements = Paragraph.objects.all().order_by("time")[:5]
             response = [{"time" : elem.time, "text" : elem.text, "name" : elem.name} for elem in elements]
+            print(response)
             return Response(response, status=HTTP_200_OK)
         except Exception as e:
             print(e)
