@@ -42,14 +42,15 @@ def update_news(news):
 @bot.message_handler(content_types=['document', 'audio', 'photo'])
 def get_photos(message):
     global news
-    if "#stonks" in message.caption:
-        news_content = message.caption.replace("#stonks", "").strip()
-        if news_content:
-            stamp = str(datetime.datetime.utcnow())
-            name = message.from_user.username
-            send_data(news_content, stamp, name)
-        # bot.send_message(message.from_user.id,
-        #                  message.caption.replace("#stonks", ""))
+    f "#stonks" in message.caption:
+        length = len("#stonks")
+        index = message.text.index("#stonks") + length
+        if index <= len(message.caption) and message.caption[index] == " ":
+            news_content = message.caption.replace("#stonks", "").strip()
+            if news_content:
+                stamp = datetime.datetime.utcnow()
+                name = message.from_user.username
+                send_data(news_content, stamp, name)
 
 
 bot.polling(none_stop=True, interval=0)

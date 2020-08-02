@@ -175,6 +175,17 @@ class News(APIView):
             return Response(status=HTTP_200_OK)
         except Exception as e:
             return Response(status=HTTP_400_BAD_REQUEST)
+
+class NewsGet(APIView):
+    def get(self, request):
+        try:
+            elements = Paragraph.objects.all().order_by("time")[:5]
+            response = [{"time" : elem.time, "text" : elem.text, "name" : elem.name} for elem in elements]
+            return Response(response, status=HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response(status=HTTP_400_BAD_REQUEST)
+
     
 def proccess_glass():
     sellers = ToSale.objects.all().order_by('price', 'time')
