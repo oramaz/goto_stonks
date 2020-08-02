@@ -39,7 +39,7 @@ class SetToSale(APIView):
         count = int(request.data.get('count'))
         time = datetime.datetime.now()
         author = request.data.get('author')
-        
+
         try:
             sale = ToSale(price=price,
                         count=count, 
@@ -138,6 +138,7 @@ class GetToSale(APIView):
             return Response(result, status=HTTP_200_OK)
         except Exception as e:
             return Response({"status": "error"}, status=HTTP_400_BAD_REQUEST)
+
 
 
 class GeneralInfo(APIView):

@@ -87,4 +87,19 @@ export default class TerminalService {
          axios(configs, resolve, reject);
       });
    }
+   async getNews(options: IRequestOptions = {}
+      ): Promise<any> {
+         return new Promise((resolve, reject) => {
+            let url = "/get_news/";
+   
+            const configs: IRequestConfig = getConfigs(
+               "get",
+               "application/json",
+               url,
+               options
+            );
+      
+            axios(configs, resolve, reject);
+         });
+      }
 }

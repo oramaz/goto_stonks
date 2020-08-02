@@ -21,7 +21,16 @@
   position: fixed;
   right: 0;
   top: 0;
-  background: #515151;
+  background: #f1f1f1;
+  padding: 20px 15px;
+  overflow-y: auto;
+}
+
+.news-item {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 7px;
 }
 
 .main-content {

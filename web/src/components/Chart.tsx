@@ -46,7 +46,7 @@ export const Chart = (props: Props) => {
          },
 
          title: {
-            text: project,
+            text: 'Фронтенд',
             align: 'left'
          },
          // subtitle: {
